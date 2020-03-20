@@ -1,0 +1,25 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+    <div>
+      <label for="nombre">
+        Nombre
+      </label>
+      <input class="form-control" id="nombre" type="text" formControlName="nombre">
+    </div>
+  
+    <div>
+      <label for="receta">
+        Receta
+      </label>
+      <input class="form-control" id="receta" type="text" formControlName="receta">
+    </div>
+
+    <div>
+      <label for="ingredientes">
+        Ingredientes
+      </label>
+      <input class="form-control" id="ingredientes" type="text" formControlName="ingredientes">
+    </div>
+    <button class="button btn btn-success" type="submit">Afegir</button>
+  
+  </form>

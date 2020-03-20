@@ -1,0 +1,13 @@
+.principal{
+    width: 100%;
+    display: inline-flex;
+}
+.vr{
+    width: 70%;
+    margin-right: 0px;
+}
+
+.cr{
+    width: 20%;
+    margin-right: 0px;
+}

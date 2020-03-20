@@ -1,0 +1,77 @@
+<div class="col-lg-12">
+<input type="text" class="caixa form-control " placeholder="Search" [(ngModel)]="query" id="listSearch">
+</div>
+<div class="caixa col-lg-12">
+  <select [(ngModel)]="filtro" class="form-control">
+   <option value="nombre">Nom +</option>
+   <option value="-nombre">Nom -</option>
+   <option value="ingredientes">Ingredients +</option>
+   <option value="-ingredientes">Ingredients -</option>
+   </select>
+</div>
+   
+    <div class="col-lg-12">
+      <button class="form-control btn btn-primary mb-2" (click)="onRecepte()">Recepte</button>
+      <button class="form-control btn btn-primary mb-5 pb-5" (click)="onComment()">Comentaris</button>
+    </div>
+
+   <div class="col-lg-12" *ngFor="let recepte of receptes | ordenar:filtro | recepteFilter: query">
+
+
+      <h1 class="bg-info">{{recepte.nombre}}</h1>
+
+      <div  class="text-center" *ngIf="tipus=='recepte'">
+      <p><span><b>Recepte:</b></span>{{recepte.receta}}</p>
+      <p><b>Ingredients:</b>{{recepte.ingredientes}}</p>
+      </div>
+
+      <div *ngIf="tipus=='comentari'">
+      <label for="nombre">
+        Comentaris
+      </label>
+     <div class="caixacoment">
+      <div *ngFor="let comentari of comentaris">
+        <div *ngIf="recepte.nombre==comentari.nombre">
+          <p>{{comentari.estrellas}}</p>
+          <p>{{comentari.comentario}}</p>
+        </div>
+      </div>
+
+     </div>
+      <hr>
+    </div>
+    </div>
+
+    <h1 class="col-lg-12 bg-warning">Afegir Comentari</h1>
+    <div class="col-lg-12 formularicom">
+      <form [formGroup]="CommentForm" (ngSubmit)="onSubmit(CommentForm.value)">
+        <div>
+          <label for="nombre">
+            Nombre
+          </label>
+          <input id="nombre" class="form-group form-control" ngClass="{
+            'has-error': !CommentForm.get('nombre').valid && CommentForm.get('nombre').touched,
+            'has-feedback': !CommentForm.get('nombre').valid && CommentForm.get('nombre').touched}" type="text" formControlName="nombre">
+        </div>
+
+        <div>
+          <label for="estrellas">
+            Estrellas
+          </label>
+          <input id="estrellas" class="form-group form-control" ngClass="{
+            'has-error': !CommentForm.get('estrellas').valid && CommentForm.get('estrellas').touched,
+            'has-feedback': !CommentForm.get('estrellas').valid && CommentForm.get('estrellas').touched}" type="text" formControlName="estrellas">
+        </div>
+    
+        <div>
+          <label for="comentario">
+            Comentari
+          </label>
+          <input id="comentario" class="form-group form-control" ngClass="{
+            'has-error': !CommentForm.get('comentario').valid && CommentForm.get('comentario').touched,
+            'has-feedback': !CommentForm.get('comentario').valid && CommentForm.get('comentario').touched}" type="text" formControlName="comentario">
+        </div>
+        <button class="button btn btn-warning" type="submit" [disabled]="!CommentForm.valid">Afegir</button>
+      
+      </form>
+    </div>
